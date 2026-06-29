@@ -3,8 +3,10 @@ using UnityEngine;
 public class ParticleManager : MonoBehaviour
 {
     public GameObject particlePrefab;
-    [SerializeField] public int particleCount = 1000;
-    [SerializeField] public float spawnRadius = 5f;
+    public static int numTypes = 8;
+    public int colorStep = Mathf.RoundToInt((float) 360/numTypes);
+    public int particleCount = 20000;
+    public float spawnRadius = 5f;
 
     void Start()
     {
