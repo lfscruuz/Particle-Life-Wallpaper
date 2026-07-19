@@ -10,7 +10,7 @@ public class Particle : MonoBehaviour
     public ParticleManager manager;
 
     public float K = 0.05f;
-    public float friction = 0.99f;
+    public float friction = 0.95f;
 
     void Start()
     {
@@ -39,17 +39,14 @@ public class Particle : MonoBehaviour
             {
                 Vector2 direction = p.position - position;
 
-                // wrap-around adjustment
                 if (direction.x > 0.5f * width) direction.x -= width;
                 if (direction.x < -0.5f * width) direction.x += width;
                 if (direction.y > 0.5f * height) direction.y -= height;
                 if (direction.y < -0.5f * height) direction.y += height;
 
                 float distance = direction.magnitude;
-                if (distance == 0f) continue; // avoid division by zero
                 direction.Normalize();
 
-                // repel if too close
                 if (distance < minDistances[type, p.type])
                 {
                     totalForce += -direction * forces[type, p.type] * K;
@@ -59,28 +56,23 @@ public class Particle : MonoBehaviour
                     totalForce += direction * forces[type, p.type] * K;
                 }
 
-                // add angular noise
                 totalForce += UnityEngine.Random.insideUnitCircle * 0.02f;
 
-                // add tangential component
                 Vector2 tangent = new Vector2(-direction.y, direction.x);
                 totalForce += tangent * 0.01f;
 
             }
         }
 
-        // add small angular noise to break straight lines
         totalForce += UnityEngine.Random.insideUnitCircle * 0.01f;
 
-        // physics integration
         Vector2 acceleration = totalForce;
         velocity += acceleration * Time.deltaTime;
-        velocity *= friction; // damping
+        velocity *= friction;
         velocity = Vector2.ClampMagnitude(velocity, 5f);
 
         position += velocity * Time.deltaTime;
 
-        // wrap around screen edges
         position.x = minX + (position.x - minX + width) % width;
         position.y = minY + (position.y - minY + height) % height;
 
