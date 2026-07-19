@@ -7,12 +7,20 @@ public class ParticleManager : MonoBehaviour
     public GameObject particlePrefab;
     public int numTypes = 8;
     public int particleCount = 20000;
+    public Particle[] particles;
     public float[,] minDistances;
     public float[,] maxDistances;
     public float[,] forces;
 
     void Start()
     {
+        particles = new Particle[particleCount];
+        minDistances = new float[numTypes, numTypes];
+        maxDistances = new float[numTypes, numTypes];
+        forces = new float[numTypes, numTypes];
+
+        SetParameters();
+
         for (int i = 0; i < particleCount; i++)
         {
             Vector3 viewportPos = new Vector3(Random.value, Random.value, 0);
@@ -23,15 +31,13 @@ public class ParticleManager : MonoBehaviour
             GameObject gameObject = Instantiate(particlePrefab, worldPos, Quaternion.identity);
             Particle particle = gameObject.GetComponent<Particle>();
 
+            particle.manager = this;
+
             int type = SetParticleType(particle);
             SetParticleColor(particle, type);
+
+            particles[i] = particle;
         }
-
-        minDistances = new float[numTypes, numTypes];
-        maxDistances = new float[numTypes, numTypes];
-        forces = new float[numTypes, numTypes];
-
-        SetParameters();
 
         Debug.Log("Forces: \n");
         for (int i = 0; i < numTypes; i++)
