@@ -12,12 +12,24 @@ public class ParticleManager : MonoBehaviour
     public float[,] maxDistances;
     public float[,] forces;
 
+    public float worldWidth;
+    public float worldHeight;
+    public Vector3 bottomLeft;
+    public Vector3 topRight;
+
     void Start()
     {
+        bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+        topRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.nearClipPlane));
+
+        worldWidth = topRight.x - bottomLeft.x;
+        worldHeight = topRight.y - bottomLeft.y;
+
         particles = new Particle[particleCount];
         minDistances = new float[numTypes, numTypes];
         maxDistances = new float[numTypes, numTypes];
         forces = new float[numTypes, numTypes];
+
 
         SetParameters();
 

@@ -9,8 +9,8 @@ public class Particle : MonoBehaviour
     private SpriteRenderer sr;
     public ParticleManager manager;
 
-    public float K = 0.005f;
-    public float friction = 0.95f;
+    public float K = 0.05f;
+    public float friction = 0.99f;
 
     void Start()
     {
@@ -21,12 +21,16 @@ public class Particle : MonoBehaviour
 
     void Update()
     {
-        var totalForce = new Vector2(0, 0);
-        var accelation = new Vector2(0, 0);
+        Vector2 totalForce = Vector2.zero;
 
         float[,] minDistances = manager.minDistances;
         float[,] maxDistances = manager.maxDistances;
         float[,] forces = manager.forces;
+
+        float width = manager.worldWidth;
+        float height = manager.worldHeight;
+        float minX = manager.bottomLeft.x;
+        float minY = manager.bottomLeft.y;
 
         for (int i = 0; i < manager.particleCount; i++)
         {
@@ -34,23 +38,53 @@ public class Particle : MonoBehaviour
             if (p != this)
             {
                 Vector2 direction = p.position - position;
+
+                // wrap-around adjustment
+                if (direction.x > 0.5f * width) direction.x -= width;
+                if (direction.x < -0.5f * width) direction.x += width;
+                if (direction.y > 0.5f * height) direction.y -= height;
+                if (direction.y < -0.5f * height) direction.y += height;
+
                 float distance = direction.magnitude;
+                if (distance == 0f) continue; // avoid division by zero
                 direction.Normalize();
 
-                if (distance > manager.minDistances[type, p.type] &&
-                    distance < manager.maxDistances[type, p.type])
+                // repel if too close
+                if (distance < minDistances[type, p.type])
                 {
-                    var force = direction * forces[type, p.type];
-                    force *= K;
-                    totalForce += force;
+                    totalForce += -direction * forces[type, p.type] * K;
                 }
+                else if (distance < maxDistances[type, p.type])
+                {
+                    totalForce += direction * forces[type, p.type] * K;
+                }
+
+                // add angular noise
+                totalForce += UnityEngine.Random.insideUnitCircle * 0.02f;
+
+                // add tangential component
+                Vector2 tangent = new Vector2(-direction.y, direction.x);
+                totalForce += tangent * 0.01f;
+
             }
         }
 
+        // add small angular noise to break straight lines
+        totalForce += UnityEngine.Random.insideUnitCircle * 0.01f;
+
+        // physics integration
         Vector2 acceleration = totalForce;
-        velocity += acceleration;
-        velocity *= friction;
-        position += velocity;
+        velocity += acceleration * Time.deltaTime;
+        velocity *= friction; // damping
+        velocity = Vector2.ClampMagnitude(velocity, 5f);
+
+        position += velocity * Time.deltaTime;
+
+        // wrap around screen edges
+        position.x = minX + (position.x - minX + width) % width;
+        position.y = minY + (position.y - minY + height) % height;
+
         transform.position = new Vector3(position.x, position.y, 0f);
     }
+
 }
