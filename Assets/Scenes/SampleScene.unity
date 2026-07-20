@@ -375,19 +375,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: particleCount
-      value: 1000
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
-      propertyPath: maxDistanceRangeMaximum
+      propertyPath: forcesRangeMinimum
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
+      propertyPath: maxDistanceRangeMaximum
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: maxDistanceRangeMinimum
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: minDistanceRangeMaximum
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: minDistanceRangeMinimum

@@ -15,6 +15,10 @@ public class Particle : MonoBehaviour
     public float overlapFactor = 0.001f;
 
     float dt;
+    void Awake()
+    {
+        Application.runInBackground = true;
+    }
 
     void Start()
     {

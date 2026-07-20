@@ -45,5 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParticleManager
   particlePrefab: {fileID: 7126711218330201768, guid: 72f5836f3f332fd4e9a4e4efb4ee0179, type: 3}
-  numTypes: 7
-  particleCount: 20000
+  numTypes: 10
+  particleCount: 1200
+  particles: []
+  minDistanceRangeMinimum: 0.5
+  minDistanceRangeMaximum: 1
+  maxDistanceRangeMinimum: 1.5
+  maxDistanceRangeMaximum: 2.5
+  forcesRangeMinimum: 1
+  forcesRangeMaximum: 5
+  bottomLeft: {x: 0, y: 0, z: 0}
+  topRight: {x: 0, y: 0, z: 0}
+  width: 0
+  height: 0
