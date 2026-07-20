@@ -12,6 +12,7 @@ public class Particle : MonoBehaviour
     public float scaler = 0.005f;
     public float friction = 0.95f;
     public float ratio = 3f;
+    public float overlapFactor = 0.001f;
 
     void Start()
     {
@@ -53,6 +54,12 @@ public class Particle : MonoBehaviour
                 {
                     var force = direction * forces[type, p.type] * ratio * scaler;
                     totalForce += force;
+
+                    float overlap = manager.minDistances[type, p.type] - distance;
+                    Vector2 correction = direction * overlap * overlapFactor;
+
+                    position -= correction;
+                    p.position += correction;
                 }
                 else if (distance < manager.maxDistances[type, p.type])
                 {
