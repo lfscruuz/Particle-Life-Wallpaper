@@ -361,7 +361,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3252765049196002845
+--- !u!1001 &696090521
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -371,43 +371,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: numTypes
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: particleCount
-      value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
-      propertyPath: forcesRangeMaximum
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
-      propertyPath: forcesRangeMinimum
-      value: 2
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: maxDistanceRangeMaximum
-      value: 10
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: maxDistanceRangeMinimum
-      value: 4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: minDistanceRangeMaximum
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: minDistanceRangeMinimum
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5297035722988897303, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.43027
       objectReference: {fileID: 0}
     - target: {fileID: 5297035722988897303, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.01042
       objectReference: {fileID: 0}
     - target: {fileID: 5297035722988897303, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -456,4 +448,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 3252765049196002845}
+  - {fileID: 696090521}
