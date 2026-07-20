@@ -371,7 +371,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: numTypes
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1376624509612313393, guid: c18247782e99e3a43bc965b4dfca1fa8, type: 3}
       propertyPath: particleCount

@@ -6,11 +6,16 @@ public class ParticleManager : MonoBehaviour
 {
     public GameObject particlePrefab;
     public int numTypes = 8;
-    public int particleCount = 20000;
+    public int particleCount = 2000;
     public Particle[] particles;
     public float[,] minDistances;
     public float[,] maxDistances;
     public float[,] forces;
+
+    public Vector3 bottomLeft;
+    public Vector3 topRight;
+    public float width;
+    public float height;
 
     void Start()
     {
@@ -18,6 +23,23 @@ public class ParticleManager : MonoBehaviour
         minDistances = new float[numTypes, numTypes];
         maxDistances = new float[numTypes, numTypes];
         forces = new float[numTypes, numTypes];
+
+        bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+        topRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.nearClipPlane));
+
+        width = topRight.x - bottomLeft.x;
+        height = topRight.y - bottomLeft.y;
+
+        int rows = 50;
+        int cols = 90;
+
+        float stepX = width / cols;
+        float stepY = height / rows;
+
+        int index = 0;
+
+        Debug.Log($"width: {width}\n");
+        Debug.Log($"height: {height}\n");
 
         SetParameters();
 
@@ -74,14 +96,14 @@ public class ParticleManager : MonoBehaviour
         {
             for (int j  = 0;j < numTypes;j++)
             {
-                forces[i, j] = Random.Range(0.25f, 1f);
+                forces[i, j] = Random.Range(1f, 5f);
 
                 if (Random.Range(0, 100) < 50)
                 {
                     forces[i, j] *= -1;
                 }
-                minDistances[i, j] = Random.Range(30, 50);
-                maxDistances[i, j] = Random.Range(70, 250);
+                minDistances[i, j] = Random.Range(1f, 1.5f);
+                maxDistances[i, j] = Random.Range(2f, 5f);
             }
         }
     }
