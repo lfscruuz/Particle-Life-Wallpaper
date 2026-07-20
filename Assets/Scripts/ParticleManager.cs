@@ -6,11 +6,19 @@ public class ParticleManager : MonoBehaviour
 {
     public GameObject particlePrefab;
     public int numTypes = 8;
-    public int particleCount = 2000;
+    public int particleCount = 1000;
     public Particle[] particles;
     public float[,] minDistances;
     public float[,] maxDistances;
     public float[,] forces;
+
+    public float minDistanceRangeMinimum = 1f;
+    public float minDistanceRangeMaximum = 1.5f;
+    public float maxDistanceRangeMinimum = 2f;
+    public float maxDistanceRangeMaximum = 5f;
+
+    public float forcesRangeMinimum = 1f;
+    public float forcesRangeMaximum = 5f;
 
     public Vector3 bottomLeft;
     public Vector3 topRight;
@@ -96,14 +104,14 @@ public class ParticleManager : MonoBehaviour
         {
             for (int j  = 0;j < numTypes;j++)
             {
-                forces[i, j] = Random.Range(1f, 5f);
+                forces[i, j] = Random.Range(forcesRangeMinimum, forcesRangeMaximum);
 
                 if (Random.Range(0, 100) < 50)
                 {
                     forces[i, j] *= -1;
                 }
-                minDistances[i, j] = Random.Range(1f, 1.5f);
-                maxDistances[i, j] = Random.Range(2f, 5f);
+                minDistances[i, j] = Random.Range(minDistanceRangeMinimum, minDistanceRangeMaximum);
+                maxDistances[i, j] = Random.Range(maxDistanceRangeMinimum, maxDistanceRangeMaximum);
             }
         }
     }
